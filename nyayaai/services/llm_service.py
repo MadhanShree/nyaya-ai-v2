@@ -40,6 +40,7 @@ def ask_llm(system: str, user: str) -> str:
                 {"role": "user", "content": user},
             ],
             temperature=0.2,
+            max_tokens=1200,
         )
     except HTTPException:
         raise

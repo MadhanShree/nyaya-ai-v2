@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
 from ..config import settings
 from ..models import Clause, DocumentState
@@ -28,6 +27,6 @@ def retrieve(
         return []
     requested = min(limit or settings.max_retrieval, settings.max_retrieval)
     query_vector = state.vectorizer.transform([query])
-    scores = cosine_similarity(query_vector, state.matrix)[0]
+    scores = (query_vector @ state.matrix.T).toarray()[0]
     ranked = sorted(enumerate(scores), key=lambda item: item[1], reverse=True)
     return [state.clauses[i] for i, score in ranked[:requested] if score > 0]
