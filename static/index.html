@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NyayaAI explains uploaded legal documents in plain language using document-grounded answers and citations.">
+  <title>NyayaAI — Legal Document Information Assistant</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">NYAYAAI</p>
+        <h1>Understand your legal document in plain language.</h1>
+        <p class="sub">
+          Upload a PDF, DOCX, or TXT document. NyayaAI summarizes it, highlights
+          clauses worth a closer look, and answers questions using document citations.
+        </p>
+      </div>
+      <div class="badge" role="note">Information, not legal advice</div>
+    </header>
+
+    <section class="card" aria-labelledby="upload-heading">
+      <h2 id="upload-heading">1. Upload document</h2>
+      <div class="controls">
+        <label class="file-label" for="file">Choose PDF, DOCX, or TXT</label>
+        <input id="file" type="file" accept=".pdf,.docx,.txt" aria-describedby="file-help">
+        <label class="sr-only" for="language">Answer language</label>
+        <select id="language">
+          <option>English</option>
+          <option>Hindi</option>
+          <option>Tamil</option>
+        </select>
+        <button id="uploadBtn" type="button">Upload document</button>
+      </div>
+      <p id="selected-file" class="help" aria-live="polite">No file selected.</p>
+      <p id="file-help" class="help">Maximum 5 MB. Scanned PDFs require OCR before upload.</p>
+      <p id="uploadStatus" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="analysis" class="grid hidden" aria-label="Document analysis">
+      <div class="card">
+        <h2>2. Plain-language summary</h2>
+        <p id="summary">Upload a document to begin.</p>
+      </div>
+      <div class="card">
+        <h2>Clauses worth a closer look</h2>
+        <div id="risks" aria-live="polite">
+          <p class="muted">No analysis yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="questions" class="card hidden" aria-labelledby="questions-heading">
+      <h2 id="questions-heading">3. Ask about the document</h2>
+      <form id="askForm">
+        <label for="question">Your question</label>
+        <textarea
+          id="question"
+          rows="4"
+          maxlength="2000"
+          placeholder="Example: What happens if I cancel this agreement?"
+          aria-describedby="question-help question-count"
+          required
+        ></textarea>
+        <div class="form-row">
+          <div>
+            <span id="question-help" class="help">Ask only about information contained in the uploaded document.</span>
+            <span id="question-count" class="help">0 / 2000</span>
+          </div>
+          <button id="askBtn" type="submit">Ask NyayaAI</button>
+        </div>
+      </form>
+      <div id="answer" class="answer" role="region" aria-live="polite" aria-label="Answer"></div>
+    </section>
+
+    <footer>
+      Always read the cited clause. NyayaAI provides information, not legal advice.
+      Consult a qualified legal professional when you need legal advice.
+    </footer>
+  </main>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
